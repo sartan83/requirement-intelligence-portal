@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Sidebar from './components/Sidebar';
 import Landing from './pages/Landing';
@@ -38,12 +38,12 @@ function AppLayout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppProvider>
         <Routes>
           <Route path="/*" element={<AppLayout />} />
         </Routes>
       </AppProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
