@@ -109,11 +109,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const startAgentAnalysis = useCallback(() => {
     setState(prev => ({ ...prev, isAgentAnalyzing: true, agentAnalysisStep: 0 }));
 
-    const totalSteps = 6;
+    const totalSteps = 7;
     for (let i = 1; i <= totalSteps; i++) {
       setTimeout(() => {
         setState(prev => ({ ...prev, agentAnalysisStep: i }));
-      }, i * 1800);
+      }, i * 1600);
     }
 
     setTimeout(() => {
@@ -124,7 +124,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         analysisResult: demoAnalysisResult,
         requirementPack: demoRequirementPack,
       }));
-    }, (totalSteps + 1) * 1800);
+    }, (totalSteps + 1) * 1600);
   }, []);
 
   const loadDemoScenario = useCallback(() => {
@@ -135,7 +135,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       analysisResult: demoAnalysisResult,
       requirementPack: demoRequirementPack,
       analysisComplete: true,
-      agentAnalysisStep: 6,
+      agentAnalysisStep: 7,
     }));
   }, []);
 

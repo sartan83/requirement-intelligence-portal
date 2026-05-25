@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Briefcase, Server, Sparkles, Lightbulb, Mic, Camera, FileText, Link2, GitBranch } from 'lucide-react';
+import { ArrowRight, Briefcase, Shield, Sparkles, Lightbulb, Mic, Camera, FileText, Link2, GitBranch } from 'lucide-react';
 import { useApp } from '../context/useApp';
 
 const businessExamples = [
@@ -11,11 +11,10 @@ const businessExamples = [
 ];
 
 const itExamples = [
-  'Analyze this repository',
-  'Assess modernization options',
-  'Identify dependencies and risks',
-  'Generate requirements for a change request',
-  'Translate technical debt into business impact',
+  'Define allowed repositories and access scopes',
+  'Set mandatory architectural patterns (e.g., Event-driven, Microservices)',
+  'Establish risk thresholds and CI/CD gates',
+  'Inject enterprise tech-stack constraints',
 ];
 
 const supportedInputs = [
@@ -52,17 +51,17 @@ export default function Landing() {
         <div className="max-w-4xl mx-auto px-6 pt-24 pb-16 text-center">
           <div className="inline-flex items-center gap-2 bg-surface-100 text-surface-600 rounded-full px-4 py-1.5 text-sm font-medium mb-8">
             <Sparkles className="w-3.5 h-3.5" />
-            Requirement Intelligence Platform
+            AI Agent Prompt Compiler
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-surface-900 mb-6 leading-[1.1] tracking-tight">
             Turn business intent into<br />
-            execution-ready IT<br />
-            requirements
+            compliant, execution-ready<br />
+            prompts for Autonomous AI Agents
           </h1>
           <p className="text-lg text-surface-500 max-w-2xl mx-auto mb-10 leading-relaxed">
             Describe what you want to change. Upload supporting material if you have it.
-            The platform analyzes business context, technical impact, dependencies and risks,
-            then generates a complete delivery-ready requirement package.
+            The platform analyzes business context, technical impact, compliance guardrails and risks,
+            then compiles a secure, execution-ready initialization script for AI coding agents.
           </p>
           <div className="flex items-center justify-center gap-3">
             <button
@@ -112,11 +111,11 @@ export default function Landing() {
           {/* IT Mode Card */}
           <div className="rounded-2xl border border-surface-200 p-8 hover:border-surface-300 transition-colors">
             <div className="w-11 h-11 rounded-xl bg-surface-100 text-surface-700 flex items-center justify-center mb-5">
-              <Server className="w-5 h-5" />
+              <Shield className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-semibold text-surface-900 mb-2">Start from an IT asset</h3>
+            <h3 className="text-lg font-semibold text-surface-900 mb-2">Set execution boundaries</h3>
             <p className="text-sm text-surface-500 mb-5 leading-relaxed">
-              For application owners, architects, engineering teams and IT demand managers.
+              For application owners, architects, engineering teams and IT demand managers. Define the guardrails AI agents must respect.
             </p>
             <div className="space-y-2 mb-6">
               {itExamples.map((ex, i) => (
@@ -130,7 +129,7 @@ export default function Landing() {
               onClick={handleITMode}
               className="w-full bg-white hover:bg-surface-50 text-surface-700 border border-surface-200 py-2.5 rounded-lg text-sm font-medium transition-colors"
             >
-              Connect IT source
+              Define Execution Boundaries
             </button>
           </div>
         </div>
@@ -141,7 +140,7 @@ export default function Landing() {
         <div className="max-w-5xl mx-auto px-6 py-16">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-surface-900 mb-2 tracking-tight">Capture ideas, meetings, screenshots, documents or repositories</h2>
-            <p className="text-surface-500 text-sm">The platform analyzes the context and creates a validated requirement pack for business and IT teams.</p>
+            <p className="text-surface-500 text-sm">The platform analyzes context, enforces compliance guardrails, and compiles agent-ready initialization scripts.</p>
           </div>
           <div className="flex items-center justify-center gap-8">
             {supportedInputs.map((input, i) => {
@@ -164,7 +163,7 @@ export default function Landing() {
         <div className="max-w-5xl mx-auto px-6 py-16 text-center">
           <h2 className="text-2xl font-bold text-surface-900 mb-3 tracking-tight">See it in action</h2>
           <p className="text-surface-500 mb-6 max-w-lg mx-auto text-sm">
-            Try the demo scenario: &ldquo;Improve digital customer onboarding&rdquo; — complete with sample inputs, agent analysis, and a full requirement intelligence pack.
+            Try the demo scenario: &ldquo;Improve digital customer onboarding&rdquo; — complete with sample inputs, agent analysis, enterprise guardrails, and a compiled Devin initialization script.
           </p>
           <button
             onClick={handleDemo}

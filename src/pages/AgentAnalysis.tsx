@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Target, GitBranch, Code, Shield, ClipboardList, Truck, Loader2, CheckCircle2 } from 'lucide-react';
+import { Target, GitBranch, Code, Shield, ClipboardList, Truck, ShieldCheck, Loader2, CheckCircle2 } from 'lucide-react';
 import { useApp } from '../context/useApp';
 import { demoAgentStatuses } from '../data/businessMockData';
 
 const iconMap: Record<string, typeof Target> = {
-  Target, GitBranch, Code, Shield, ClipboardList, Truck,
+  Target, GitBranch, Code, Shield, ClipboardList, Truck, ShieldCheck,
 };
 
 export default function AgentAnalysis() {

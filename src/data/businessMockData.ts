@@ -1,4 +1,4 @@
-import type { IntakeData, AnalysisResult, RequirementPack, AgentStatus } from '../types/business';
+import type { IntakeData, AnalysisResult, RequirementPack, AgentStatus, EnterpriseGuardrail, CompiledDevinPrompt } from '../types/business';
 
 export const demoIntakeData: IntakeData = {
   mode: 'business',
@@ -97,6 +97,20 @@ export const demoAgentStatuses: AgentStatus[] = [
       'Planning test strategy...',
       'Building delivery timeline...',
       'Delivery plan complete.',
+    ],
+  },
+  {
+    id: 'agent-7',
+    name: 'Compliance & Security Guardrail Agent',
+    role: 'Automatically maps business intent against GDPR, DORA, and internal security policies to inject non-negotiable architectural constraints.',
+    icon: 'ShieldCheck',
+    steps: [
+      'Scanning input for PII and sensitive data markers...',
+      'Mapping against GDPR data protection requirements...',
+      'Evaluating DORA resilience standards...',
+      'Checking internal security policy compliance...',
+      'Injecting non-negotiable architectural constraints...',
+      'Compliance guardrail assessment complete.',
     ],
   },
 ];
@@ -204,6 +218,49 @@ export const demoAnalysisResult: AnalysisResult = {
   },
 };
 
+export const demoEnterpriseGuardrails: EnterpriseGuardrail[] = [
+  { id: 'EG-001', trigger: 'PII Detected — Customer identity documents, personal data fields', enforcement: 'Enforcing AES-256 encryption at rest, TLS 1.3 in transit, PII masking in all logs', standard: 'GDPR Article 32 — Security of Processing', severity: 'critical' },
+  { id: 'EG-002', trigger: 'Financial Data — Transaction records, account balances, approval decisions', enforcement: 'Enforcing DORA resilience standards — 99.99% availability, automated failover, immutable audit trail', standard: 'DORA — Digital Operational Resilience Act', severity: 'critical' },
+  { id: 'EG-003', trigger: 'Automated Decision Making — Risk-based application routing', enforcement: 'Enforcing human-in-the-loop for high-risk decisions, explainability logging for all auto-approvals', standard: 'GDPR Article 22 — Automated Decision Making', severity: 'high' },
+  { id: 'EG-004', trigger: 'Data Retention — Onboarding documents and audit records', enforcement: 'Enforcing 7-year retention policy, right to erasure workflow, data minimization review', standard: 'GDPR Article 5(1)(e) — Storage Limitation', severity: 'high' },
+  { id: 'EG-005', trigger: 'Third-Party Integration — Identity verification provider API', enforcement: 'Enforcing vendor risk assessment, data processing agreement, fallback mechanism for provider outage', standard: 'Internal Security Policy — Third-Party Risk', severity: 'medium' },
+  { id: 'EG-006', trigger: 'Cross-Border Data Transfer — Customer data processing', enforcement: 'Enforcing data residency constraints, Standard Contractual Clauses validation', standard: 'GDPR Chapter V — Transfers to Third Countries', severity: 'high' },
+];
+
+export const demoCompiledDevinPrompt: CompiledDevinPrompt = {
+  contextAndGoal: `You are implementing improvements to a digital customer onboarding application (Spring Boot 3.3 + React 18 + PostgreSQL 16).
+
+**Business Goal:** Reduce customer onboarding drop-off from 35% to under 10%, cut average approval time from 3 days to under 4 hours, and ensure full regulatory compliance for upcoming Q4 2026 audit.
+
+**Repository:** https://github.com/sartan83/online-banking-application (branch: main)
+
+**Scope:** Phase 1 — Foundation: Document upload redesign, application resume capability, status tracking API, basic audit logging.`,
+  strictBoundaries: [
+    'SECURITY: All customer documents MUST be encrypted at rest using AES-256 and in transit using TLS 1.3. No exceptions.',
+    'SECURITY: PII data MUST be masked in all application logs, error outputs, and audit trails. Use structured logging with PII redaction filters.',
+    'COMPLIANCE (GDPR Art.32): Implement role-based access control for all endpoints handling personal data. Minimum: customer, operator, compliance-officer, admin roles.',
+    'COMPLIANCE (DORA): The document upload service and status API MUST have automated failover. Target: 99.99% availability. Implement circuit breaker pattern.',
+    'COMPLIANCE (GDPR Art.22): Auto-approval routing MUST log the decision rationale. High-risk applications (>$50K) MUST require human review. No fully automated decisions on high-risk.',
+    'ARCHITECTURE: Document upload service MUST be a separate microservice with independent horizontal scaling. Do NOT embed in monolith.',
+    'ARCHITECTURE: Audit trail MUST use append-only storage. Records are immutable once written. Use event sourcing pattern.',
+    'DATA: Database migrations MUST be backward-compatible. Use expand-contract pattern. No destructive migrations.',
+    'DATA: Implement data retention policy: 7-year retention for audit records, 30-day expiry for incomplete applications with configurable reminder schedule.',
+    'TESTING: All routing logic MUST have >95% unit test coverage. Integration tests required for document upload pipeline. E2E test for complete onboarding journey.',
+  ],
+  acceptanceCriteriaAsTests: [
+    'test("customer can resume incomplete application"): Start onboarding, close browser, return after 1 hour — verify all previously entered data is preserved and customer lands on exact step where they left off.',
+    'test("document upload works on mobile"): Upload passport photo via iOS Safari and Android Chrome — verify file validation completes in <3s, clear error shown for wrong format, drag-and-drop works on desktop.',
+    'test("real-time status tracking"): Submit application, verify status page shows current step and estimated completion time, verify push notification sent on each status change within 30 seconds.',
+    'test("risk-based routing"): Submit low-risk application — verify auto-advance within 1 hour. Submit high-risk application ($50K+) — verify routed to manual review queue with reason logged.',
+    'test("SLA monitoring"): Create application approaching SLA threshold — verify yellow warning at 80%, red alert at 100%, manager escalation notification triggered.',
+    'test("audit trail immutability"): Create approval decision, attempt to modify audit record via direct DB access — verify record is immutable and tampering is detected.',
+    'test("PII masking in logs"): Trigger document upload error, inspect application logs — verify no PII (name, document number, address) appears in plain text.',
+    'test("encryption at rest"): Upload customer document, inspect database storage — verify document content is encrypted (AES-256), not stored in plain text.',
+    'test("GDPR right to erasure"): Request data deletion for test customer — verify all personal data removed, audit trail entry created for deletion event, documents purged from storage.',
+    'test("backward-compatible migration"): Apply new database migration, verify existing application functionality works without downtime, rollback migration and verify no data loss.',
+  ],
+};
+
 export const demoRequirementPack: RequirementPack = {
   functionalRequirements: [
     { id: 'FR-001', description: 'Allow customers to resume incomplete onboarding applications', userRole: 'Retail Customer', priority: 'high', rationale: 'Reduces drop-off caused by session interruption', acceptanceCriteria: ['Customer can return to exact step where they left off', 'Partial data preserved for 30 days', 'Progress indicator shows completion status'] },
@@ -265,6 +322,8 @@ export const demoRequirementPack: RequirementPack = {
     dataRisks: ['PII exposure during document processing', 'Data consistency during partial application resume', 'Audit log integrity under high concurrency'],
     operationalRisks: ['Operations team capacity during transition period', 'Fallback process if automated routing fails', 'Monitoring gaps during initial deployment'],
   },
+  enterpriseGuardrails: demoEnterpriseGuardrails,
+  compiledDevinPrompt: demoCompiledDevinPrompt,
   deliveryPlan: {
     recommendedPath: 'Phased implementation starting with document upload improvements and application resume, followed by automated routing and SLA monitoring.',
     mvpScope: [

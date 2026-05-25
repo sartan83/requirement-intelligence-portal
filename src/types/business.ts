@@ -107,12 +107,28 @@ export interface DeliveryPlan {
   rollbackConsiderations: string[];
 }
 
+export interface EnterpriseGuardrail {
+  id: string;
+  trigger: string;
+  enforcement: string;
+  standard: string;
+  severity: 'critical' | 'high' | 'medium';
+}
+
+export interface CompiledDevinPrompt {
+  contextAndGoal: string;
+  strictBoundaries: string[];
+  acceptanceCriteriaAsTests: string[];
+}
+
 export interface RequirementPack {
   functionalRequirements: FunctionalReq[];
   technicalRequirements: TechnicalReqs;
+  enterpriseGuardrails: EnterpriseGuardrail[];
   userStories: UserStory[];
   riskDependencyMap: RiskDependencyMap;
   deliveryPlan: DeliveryPlan;
+  compiledDevinPrompt: CompiledDevinPrompt;
 }
 
 export interface AnalysisResult {
