@@ -28,7 +28,7 @@ export default function AppMap() {
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
           <h2 className="text-lg font-semibold text-surface-700 mb-2">No Analysis Available</h2>
-          <button onClick={() => navigate('/connect')} className="text-primary-600 hover:text-primary-700 text-sm font-medium">
+          <button onClick={() => navigate('/connect')} className="text-surface-600 hover:text-surface-900 text-sm font-medium">
             Connect Repository
           </button>
         </div>
@@ -45,7 +45,7 @@ export default function AppMap() {
         </div>
         <button
           onClick={() => navigate(summary.hasUI ? '/mockup' : '/components')}
-          className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+          className="bg-surface-900 hover:bg-surface-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
         >
           {summary.hasUI ? 'UI Workspace' : 'Component Workspace'} <ArrowRight className="w-4 h-4" />
         </button>
@@ -54,7 +54,7 @@ export default function AppMap() {
       {/* Architecture Diagram */}
       <div className="bg-white rounded-xl border border-surface-200 p-6">
         <h2 className="font-semibold text-surface-900 mb-5 flex items-center gap-2">
-          <Workflow className="w-4.5 h-4.5 text-primary-600" />
+          <Workflow className="w-4.5 h-4.5 text-surface-500" />
           System Architecture
         </h2>
         <div className="grid grid-cols-3 gap-6">
@@ -145,7 +145,7 @@ export default function AppMap() {
                 <div className="space-y-1.5">
                   {journey.steps.map((step, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-primary-100 text-primary-700 text-xs flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="w-5 h-5 rounded-full bg-surface-100 text-surface-700 text-xs flex items-center justify-center shrink-0 mt-0.5">
                         {i + 1}
                       </span>
                       <span className="text-xs text-surface-600">{step}</span>
@@ -166,7 +166,7 @@ export default function AppMap() {
       {/* Data Entities */}
       <div className="bg-white rounded-xl border border-surface-200 p-6">
         <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-          <Database className="w-4.5 h-4.5 text-primary-600" />
+          <Database className="w-4.5 h-4.5 text-surface-500" />
           Data Entities
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
@@ -183,7 +183,7 @@ export default function AppMap() {
               </div>
               <div className="border-t border-surface-100 pt-2">
                 {entity.relationships.map((rel, i) => (
-                  <div key={i} className="text-xs text-primary-600">{rel}</div>
+                  <div key={i} className="text-xs text-surface-500">{rel}</div>
                 ))}
               </div>
             </div>

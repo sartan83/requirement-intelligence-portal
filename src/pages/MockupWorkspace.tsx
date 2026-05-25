@@ -20,12 +20,12 @@ const elementColors: Record<string, string> = {
   sidebar: 'bg-surface-800 text-white',
   form: 'bg-white border-2 border-surface-300',
   table: 'bg-white border border-surface-300',
-  button: 'bg-primary-600 text-white',
+  button: 'bg-surface-900 text-white',
   input: 'bg-white border border-surface-300',
   card: 'bg-white border border-surface-200 shadow-sm',
   list: 'bg-white border border-surface-200',
   text: 'text-surface-600',
-  modal: 'bg-white border-2 border-primary-300 shadow-xl',
+  modal: 'bg-white border-2 border-surface-400 shadow-xl',
 };
 
 interface ChangeCapture {
@@ -55,7 +55,7 @@ export default function MockupWorkspace() {
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
           <h2 className="text-lg font-semibold text-surface-700 mb-2">No UI Screens Available</h2>
-          <button onClick={() => navigate('/connect')} className="text-primary-600 text-sm font-medium">Connect Repository</button>
+          <button onClick={() => navigate('/connect')} className="text-surface-600 hover:text-surface-900 text-sm font-medium">Connect Repository</button>
         </div>
       </div>
     );
@@ -169,7 +169,7 @@ export default function MockupWorkspace() {
       <div className="bg-white border-b border-surface-200 px-4 py-2 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
-            <MonitorSmartphone className="w-4.5 h-4.5 text-primary-600 mr-2" />
+            <MonitorSmartphone className="w-4.5 h-4.5 text-surface-500 mr-2" />
             <h1 className="text-sm font-semibold text-surface-900">UI Mockup Workspace</h1>
           </div>
           <div className="h-5 w-px bg-surface-200" />
@@ -200,7 +200,7 @@ export default function MockupWorkspace() {
                   key={item.m}
                   onClick={() => setMode(item.m)}
                   className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium transition-colors ${
-                    mode === item.m ? 'bg-white text-primary-600 shadow-sm' : 'text-surface-500 hover:text-surface-700'
+                    mode === item.m ? 'bg-white text-surface-900 shadow-sm' : 'text-surface-500 hover:text-surface-700'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -220,7 +220,7 @@ export default function MockupWorkspace() {
           {changes.length > 0 && (
             <button
               onClick={generateRequirementsFromChanges}
-              className="flex items-center gap-1.5 bg-primary-600 hover:bg-primary-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 bg-surface-900 hover:bg-surface-800 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
             >
               Generate Requirements ({changes.length}) <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -260,7 +260,7 @@ export default function MockupWorkspace() {
                   key={el.id}
                   onClick={() => handleElementClick(el)}
                   className={`absolute rounded cursor-pointer transition-shadow flex items-center justify-center text-xs font-medium ${elementColors[el.type] ?? 'bg-surface-100 border border-surface-300'} ${
-                    isSelected ? 'ring-2 ring-primary-500 ring-offset-1 z-10' : 'hover:ring-1 hover:ring-primary-300'
+                    isSelected ? 'ring-2 ring-surface-900 ring-offset-1 z-10' : 'hover:ring-1 hover:ring-surface-400'
                   }`}
                   style={{ left: el.x, top: el.y, width: el.width, height: el.height }}
                 >
@@ -292,7 +292,7 @@ export default function MockupWorkspace() {
                       />
                       <button
                         onClick={handleLabelSave}
-                        className="bg-primary-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-primary-700"
+                        className="bg-surface-900 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-surface-800"
                       >
                         Save
                       </button>

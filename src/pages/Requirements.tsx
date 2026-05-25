@@ -103,18 +103,18 @@ export default function Requirements() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-surface-900 mb-1 flex items-center gap-2">
-            <ClipboardList className="w-6 h-6 text-primary-600" />
+            <ClipboardList className="w-6 h-6 text-surface-900" />
             Requirement Builder
           </h1>
           <p className="text-surface-500 text-sm">
             {requirements.length} requirements &middot; {approvedCount} approved
-            {selectedCount > 0 && <span className="text-primary-600 font-medium"> &middot; {selectedCount} selected</span>}
+            {selectedCount > 0 && <span className="text-surface-900 font-medium"> &middot; {selectedCount} selected</span>}
           </p>
         </div>
         <button
           onClick={handleGenerateHandoff}
           disabled={selectedCount === 0 && approvedCount === 0}
-          className="bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+          className="bg-surface-900 hover:bg-surface-800 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
         >
           Generate Execution Package{selectedCount > 0 ? ` (${selectedCount})` : ''} <ArrowRight className="w-4 h-4" />
         </button>
@@ -128,7 +128,7 @@ export default function Requirements() {
               key={type}
               onClick={() => setFilterType(type)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${
-                filterType === type ? 'bg-primary-600 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+                filterType === type ? 'bg-surface-900 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
               }`}
             >
               {type}
@@ -138,7 +138,7 @@ export default function Requirements() {
         {filtered.length > 0 && (
           <button
             onClick={toggleSelectAll}
-            className="text-xs text-surface-500 hover:text-primary-600 font-medium flex items-center gap-1.5 transition-colors"
+            className="text-xs text-surface-500 hover:text-surface-900 font-medium flex items-center gap-1.5 transition-colors"
           >
             {selectedIds.size === filtered.length ? (
               <><CheckSquare className="w-4 h-4" /> Deselect All</>
@@ -175,7 +175,7 @@ export default function Requirements() {
       {/* Custom Change Description */}
       <div className="bg-white rounded-xl border border-surface-200 p-5">
         <h3 className="text-sm font-semibold text-surface-900 mb-3 flex items-center gap-2">
-          <MessageSquarePlus className="w-4 h-4 text-primary-600" />
+          <MessageSquarePlus className="w-4 h-4 text-surface-500" />
           Describe Additional Changes
         </h3>
         <p className="text-xs text-surface-500 mb-3">Describe any other modifications you need in natural language. A new requirement will be created from your description.</p>
@@ -219,7 +219,7 @@ function RequirementCard({
   onMarkReady: () => void;
 }) {
   return (
-    <div className={`bg-white rounded-xl border overflow-hidden transition-colors ${selected ? 'border-primary-400 ring-1 ring-primary-200' : 'border-surface-200'}`}>
+    <div className={`bg-white rounded-xl border overflow-hidden transition-colors ${selected ? 'border-surface-900 ring-1 ring-surface-200' : 'border-surface-200'}`}>
       {/* Header */}
       <div className="flex items-center">
         <button
@@ -228,7 +228,7 @@ function RequirementCard({
           title={selected ? 'Deselect requirement' : 'Select requirement'}
         >
           {selected ? (
-            <CheckSquare className="w-5 h-5 text-primary-600" />
+            <CheckSquare className="w-5 h-5 text-surface-900" />
           ) : (
             <Square className="w-5 h-5 text-surface-300 hover:text-surface-500" />
           )}
@@ -299,7 +299,7 @@ function RequirementCard({
             {req.status === 'draft' && (
               <button
                 onClick={onApprove}
-                className="bg-success-600 hover:bg-success-500 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors"
               >
                 Approve Requirement
               </button>
@@ -307,7 +307,7 @@ function RequirementCard({
             {req.status === 'approved' && (
               <button
                 onClick={onMarkReady}
-                className="bg-accent-600 hover:bg-accent-500 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors"
+                className="bg-surface-900 hover:bg-surface-800 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors"
               >
                 Mark Ready for Execution
               </button>
@@ -328,7 +328,7 @@ function Section({ icon: Icon, title, children }: { icon: typeof Target; title: 
   return (
     <div>
       <h4 className="text-sm font-semibold text-surface-900 mb-3 flex items-center gap-2">
-        <Icon className="w-4 h-4 text-primary-600" />
+        <Icon className="w-4 h-4 text-surface-500" />
         {title}
       </h4>
       <div className="space-y-3 pl-6">{children}</div>
@@ -338,19 +338,19 @@ function Section({ icon: Icon, title, children }: { icon: typeof Target; title: 
 
 function Field({ label, value, highlight, icon: Icon }: { label: string; value: string; highlight?: boolean; icon?: typeof Target }) {
   return (
-    <div className={highlight ? 'bg-primary-50 border border-primary-200 rounded-lg p-3' : ''}>
+    <div className={highlight ? 'bg-surface-50 border border-surface-200 rounded-lg p-3' : ''}>
       {label && <div className="text-xs font-medium text-surface-500 mb-0.5 flex items-center gap-1">
         {Icon && <Icon className="w-3 h-3" />}
         {label}
       </div>}
-      <p className={`text-sm ${highlight ? 'text-primary-800 italic' : 'text-surface-700'}`}>{value}</p>
+      <p className={`text-sm ${highlight ? 'text-surface-800 italic' : 'text-surface-700'}`}>{value}</p>
     </div>
   );
 }
 
 function ListField({ label, items, mono, variant, icon: Icon }: { label: string; items: string[]; mono?: boolean; variant?: 'warning' | 'info'; icon?: typeof Target }) {
   if (items.length === 0) return null;
-  const variantColors = { warning: 'text-warning-600', info: 'text-primary-600' };
+  const variantColors = { warning: 'text-warning-600', info: 'text-surface-600' };
   return (
     <div>
       {label && <div className="text-xs font-medium text-surface-500 mb-1 flex items-center gap-1">

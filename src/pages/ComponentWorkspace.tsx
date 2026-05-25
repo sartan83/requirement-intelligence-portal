@@ -34,7 +34,7 @@ export default function ComponentWorkspace() {
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
           <h2 className="text-lg font-semibold text-surface-700 mb-2">No Analysis Available</h2>
-          <button onClick={() => navigate('/connect')} className="text-primary-600 text-sm font-medium">Connect Repository</button>
+          <button onClick={() => navigate('/connect')} className="text-surface-600 hover:text-surface-900 text-sm font-medium">Connect Repository</button>
         </div>
       </div>
     );
@@ -112,13 +112,13 @@ export default function ComponentWorkspace() {
       {/* Header */}
       <div className="bg-white border-b border-surface-200 px-6 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <Workflow className="w-4.5 h-4.5 text-primary-600" />
+          <Workflow className="w-4.5 h-4.5 text-surface-500" />
           <h1 className="text-sm font-semibold text-surface-900">Component Workspace</h1>
         </div>
         {changeProposals.length > 0 && (
           <button
             onClick={generateRequirementsFromProposals}
-            className="flex items-center gap-1.5 bg-primary-600 hover:bg-primary-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 bg-surface-900 hover:bg-surface-800 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
           >
             Generate Requirements ({changeProposals.length}) <ArrowRight className="w-3.5 h-3.5" />
           </button>
@@ -138,7 +138,7 @@ export default function ComponentWorkspace() {
                   onClick={() => { setActiveTab(tab.key); setSelectedItem(null); }}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium transition-colors ${
                     activeTab === tab.key
-                      ? 'text-primary-600 border-b-2 border-primary-600'
+                      ? 'text-surface-900 border-b-2 border-surface-900'
                       : 'text-surface-500 hover:text-surface-700'
                   }`}
                 >
@@ -155,7 +155,7 @@ export default function ComponentWorkspace() {
                 key={mod.id}
                 onClick={() => setSelectedItem(mod.id)}
                 className={`w-full text-left p-3 rounded-lg transition-colors ${
-                  selectedItem === mod.id ? 'bg-primary-50 border border-primary-200' : 'hover:bg-surface-50 border border-transparent'
+                  selectedItem === mod.id ? 'bg-surface-50 border border-surface-200' : 'hover:bg-surface-50 border border-transparent'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -169,14 +169,14 @@ export default function ComponentWorkspace() {
             {activeTab === 'apis' && summary.apiEndpoints.map((ep: ApiEndpoint, i: number) => {
               const id = `api-${i}`;
               const methodColors: Record<string, string> = {
-                GET: 'text-success-600', POST: 'text-primary-600', PUT: 'text-warning-600', DELETE: 'text-danger-600',
+                GET: 'text-success-600', POST: 'text-blue-600', PUT: 'text-warning-600', DELETE: 'text-danger-600',
               };
               return (
                 <button
                   key={id}
                   onClick={() => setSelectedItem(id)}
                   className={`w-full text-left p-3 rounded-lg transition-colors ${
-                    selectedItem === id ? 'bg-primary-50 border border-primary-200' : 'hover:bg-surface-50 border border-transparent'
+                    selectedItem === id ? 'bg-surface-50 border border-surface-200' : 'hover:bg-surface-50 border border-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -195,7 +195,7 @@ export default function ComponentWorkspace() {
                   key={id}
                   onClick={() => setSelectedItem(id)}
                   className={`w-full text-left p-3 rounded-lg transition-colors ${
-                    selectedItem === id ? 'bg-primary-50 border border-primary-200' : 'hover:bg-surface-50 border border-transparent'
+                    selectedItem === id ? 'bg-surface-50 border border-surface-200' : 'hover:bg-surface-50 border border-transparent'
                   }`}
                 >
                   <div className="text-sm font-medium text-surface-900 mb-1">{entity.name}</div>
@@ -209,7 +209,7 @@ export default function ComponentWorkspace() {
                 key={td.id}
                 onClick={() => setSelectedItem(td.id)}
                 className={`w-full text-left p-3 rounded-lg transition-colors ${
-                  selectedItem === td.id ? 'bg-primary-50 border border-primary-200' : 'hover:bg-surface-50 border border-transparent'
+                  selectedItem === td.id ? 'bg-surface-50 border border-surface-200' : 'hover:bg-surface-50 border border-transparent'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -277,7 +277,7 @@ export default function ComponentWorkspace() {
                       <div>
                         <span className="text-xs font-medium text-surface-500 block mb-1">Relationships:</span>
                         {entity.relationships.map((r, i) => (
-                          <div key={i} className="text-xs text-primary-600">{r}</div>
+                          <div key={i} className="text-xs text-surface-500">{r}</div>
                         ))}
                       </div>
                     </div>
@@ -294,9 +294,9 @@ export default function ComponentWorkspace() {
                         <StatusBadge status={td.severity} />
                       </div>
                       <p className="text-sm text-surface-600">{td.description}</p>
-                      <div className="bg-primary-50 border border-primary-200 rounded-lg p-3">
-                        <span className="text-xs font-medium text-primary-700 block mb-1">Recommendation:</span>
-                        <p className="text-sm text-primary-800">{td.recommendation}</p>
+                      <div className="bg-surface-50 border border-surface-200 rounded-lg p-3">
+                        <span className="text-xs font-medium text-surface-700 block mb-1">Recommendation:</span>
+                        <p className="text-sm text-surface-700">{td.recommendation}</p>
                       </div>
                     </div>
                   );
@@ -307,7 +307,7 @@ export default function ComponentWorkspace() {
               {!showProposalForm ? (
                 <button
                   onClick={() => setShowProposalForm(true)}
-                  className="w-full flex items-center justify-center gap-2 border-2 border-dashed border-surface-300 hover:border-primary-400 text-surface-500 hover:text-primary-600 rounded-xl py-4 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 border-2 border-dashed border-surface-300 hover:border-surface-400 text-surface-500 hover:text-surface-700 rounded-xl py-4 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   <span className="text-sm font-medium">Propose Change for {getSelectedName()}</span>
@@ -326,7 +326,7 @@ export default function ComponentWorkspace() {
                               key={type}
                               onClick={() => setProposalType(type)}
                               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                                proposalType === type ? 'bg-primary-600 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+                                proposalType === type ? 'bg-surface-900 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
                               }`}
                             >
                               <Icon className="w-3.5 h-3.5" />
@@ -350,7 +350,7 @@ export default function ComponentWorkspace() {
                       <button
                         onClick={handleCreateProposal}
                         disabled={!proposalDesc}
-                        className="bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        className="bg-surface-900 hover:bg-surface-800 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                       >
                         Create Proposal
                       </button>
@@ -374,11 +374,11 @@ export default function ComponentWorkspace() {
                       const Icon = changeTypeIcons[p.changeType];
                       return (
                         <div key={p.id} className="bg-surface-50 border border-surface-200 rounded-lg p-3 flex items-start gap-3">
-                          <Icon className="w-4 h-4 text-primary-600 mt-0.5 shrink-0" />
+                          <Icon className="w-4 h-4 text-surface-500 mt-0.5 shrink-0" />
                           <div>
                             <div className="text-sm font-medium text-surface-800">{p.componentName}</div>
                             <div className="text-xs text-surface-500">{p.description}</div>
-                            <span className="text-xs text-primary-600 capitalize">{p.changeType}</span>
+                            <span className="text-xs text-surface-500 capitalize">{p.changeType}</span>
                           </div>
                         </div>
                       );

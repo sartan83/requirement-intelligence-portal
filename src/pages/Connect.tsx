@@ -47,7 +47,7 @@ export default function Connect() {
       {/* Manual Input */}
       <div className="bg-white rounded-xl border border-surface-200 p-6 mb-6">
         <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-          <GitBranch className="w-4.5 h-4.5 text-primary-600" />
+          <GitBranch className="w-4.5 h-4.5 text-surface-500" />
           Repository URL
         </h2>
         <div className="space-y-3">
@@ -71,7 +71,7 @@ export default function Connect() {
             <button
               onClick={() => handleConnect()}
               disabled={!url || isAnalyzing}
-              className="bg-primary-600 hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+              className="bg-surface-900 hover:bg-surface-800 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
             >
               {isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
               Analyze
@@ -89,7 +89,7 @@ export default function Connect() {
               <button
                 key={repo.url}
                 onClick={() => handleConnect(repo.url, repo.branch)}
-                className="w-full text-left border border-surface-200 hover:border-primary-300 hover:bg-primary-50/30 rounded-lg p-4 transition-colors"
+                className="w-full text-left border border-surface-200 hover:border-surface-400 hover:bg-surface-50 rounded-xl p-4 transition-colors"
               >
                 <div className="font-medium text-sm text-surface-900">{repo.name}</div>
                 <div className="text-xs text-surface-500 mt-0.5">{repo.desc}</div>
@@ -114,17 +114,17 @@ export default function Connect() {
                 <div
                   key={i}
                   className={`flex items-center gap-3 p-3 rounded-lg transition-colors ${
-                    active ? 'bg-primary-50 border border-primary-200' : done ? 'bg-surface-50' : 'opacity-40'
+                    active ? 'bg-surface-50 border border-surface-200' : done ? 'bg-surface-50' : 'opacity-40'
                   }`}
                 >
                   {active && !done ? (
-                    <Loader2 className="w-5 h-5 text-primary-600 animate-spin" />
+                    <Loader2 className="w-5 h-5 text-surface-600 animate-spin" />
                   ) : done ? (
                     <CheckCircle2 className="w-5 h-5 text-success-600" />
                   ) : (
                     <Icon className="w-5 h-5 text-surface-400" />
                   )}
-                  <span className={`text-sm ${active ? 'text-primary-700 font-medium' : done ? 'text-surface-700' : 'text-surface-400'}`}>
+                  <span className={`text-sm ${active ? 'text-surface-900 font-medium' : done ? 'text-surface-700' : 'text-surface-400'}`}>
                     {step.label}
                   </span>
                 </div>
@@ -140,7 +140,7 @@ export default function Connect() {
               </div>
               <button
                 onClick={() => navigate('/analysis')}
-                className="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
+                className="bg-surface-900 hover:bg-surface-800 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
               >
                 View Analysis
               </button>

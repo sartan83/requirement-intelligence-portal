@@ -23,7 +23,7 @@ export default function Analysis() {
         <div className="text-center">
           <h2 className="text-lg font-semibold text-surface-700 mb-2">No Analysis Available</h2>
           <p className="text-sm text-surface-500 mb-4">Connect a repository first to view the analysis.</p>
-          <button onClick={() => navigate('/connect')} className="text-primary-600 hover:text-primary-700 text-sm font-medium">
+          <button onClick={() => navigate('/connect')} className="text-surface-600 hover:text-surface-900 text-sm font-medium">
             Connect Repository
           </button>
         </div>
@@ -45,7 +45,7 @@ export default function Analysis() {
         </div>
         <button
           onClick={() => navigate('/map')}
-          className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+          className="bg-surface-900 hover:bg-surface-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
         >
           View App Map <ArrowRight className="w-4 h-4" />
         </button>
@@ -56,7 +56,7 @@ export default function Analysis() {
         <h2 className="font-semibold text-surface-900 mb-3">Application Purpose</h2>
         <p className="text-sm text-surface-600 leading-relaxed">{summary.purpose}</p>
         <div className="mt-3 flex items-center gap-2">
-          <span className="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded font-medium">
+          <span className="text-xs bg-surface-100 text-surface-700 px-2 py-0.5 rounded font-medium">
             {summary.hasUI ? 'UI Application Detected' : 'Non-UI Application'}
           </span>
         </div>
@@ -66,7 +66,7 @@ export default function Analysis() {
       <div className="grid md:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-            <FileCode className="w-4.5 h-4.5 text-primary-600" />
+            <FileCode className="w-4.5 h-4.5 text-surface-500" />
             Technology Stack
           </h2>
           <div className="space-y-4">
@@ -76,7 +76,7 @@ export default function Analysis() {
                 {techStack.languages.map(l => (
                   <div key={l.name} className="flex items-center gap-2">
                     <div className="flex-1 h-2 bg-surface-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-primary-500 rounded-full" style={{ width: `${l.percentage}%` }} />
+                      <div className="h-full bg-surface-900 rounded-full" style={{ width: `${l.percentage}%` }} />
                     </div>
                     <span className="text-xs text-surface-600 w-28 text-right">{l.name} ({l.percentage}%)</span>
                   </div>
@@ -112,7 +112,7 @@ export default function Analysis() {
 
         <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-            <Layers className="w-4.5 h-4.5 text-primary-600" />
+            <Layers className="w-4.5 h-4.5 text-surface-500" />
             File Structure
           </h2>
           <div className="space-y-3">
@@ -132,12 +132,12 @@ export default function Analysis() {
       {/* Modules */}
       <div className="bg-white rounded-xl border border-surface-200 p-6">
         <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-          <Server className="w-4.5 h-4.5 text-primary-600" />
+          <Server className="w-4.5 h-4.5 text-surface-500" />
           Functional Modules
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {summary.modules.map(mod => (
-            <div key={mod.id} className="border border-surface-200 rounded-lg p-4 hover:border-primary-200 transition-colors">
+            <div key={mod.id} className="border border-surface-200 rounded-lg p-4 hover:border-surface-300 transition-colors">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-sm font-semibold text-surface-900">{mod.name}</h3>
                 <StatusBadge status={mod.status} variant="dot" />
@@ -151,7 +151,7 @@ export default function Analysis() {
       {/* API Endpoints */}
       <div className="bg-white rounded-xl border border-surface-200 p-6">
         <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-          <Globe className="w-4.5 h-4.5 text-primary-600" />
+          <Globe className="w-4.5 h-4.5 text-surface-500" />
           API Endpoints
         </h2>
         <div className="overflow-x-auto">
@@ -168,7 +168,7 @@ export default function Analysis() {
               {summary.apiEndpoints.map((ep, i) => {
                 const methodColors: Record<string, string> = {
                   GET: 'bg-success-500/10 text-success-600',
-                  POST: 'bg-primary-100 text-primary-700',
+                  POST: 'bg-surface-100 text-surface-700',
                   PUT: 'bg-warning-500/10 text-warning-600',
                   DELETE: 'bg-danger-500/10 text-danger-600',
                   PATCH: 'bg-accent-500/10 text-accent-600',
@@ -195,7 +195,7 @@ export default function Analysis() {
         {summary.authMechanism && (
           <div className="bg-white rounded-xl border border-surface-200 p-6">
             <h2 className="font-semibold text-surface-900 mb-3 flex items-center gap-2">
-              <Shield className="w-4.5 h-4.5 text-primary-600" />
+              <Shield className="w-4.5 h-4.5 text-surface-500" />
               Authentication
             </h2>
             <div className="text-sm font-medium text-surface-700 mb-1">{summary.authMechanism.type}</div>
@@ -203,7 +203,7 @@ export default function Analysis() {
             <ul className="space-y-1">
               {summary.authMechanism.features.map((f, i) => (
                 <li key={i} className="text-xs text-surface-600 flex items-start gap-1.5">
-                  <span className="text-primary-500 mt-0.5">&#8226;</span>{f}
+                  <span className="text-surface-400 mt-0.5">&#8226;</span>{f}
                 </li>
               ))}
             </ul>
@@ -213,7 +213,7 @@ export default function Analysis() {
         {/* Test Coverage */}
         <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold text-surface-900 mb-3 flex items-center gap-2">
-            <TestTube2 className="w-4.5 h-4.5 text-primary-600" />
+            <TestTube2 className="w-4.5 h-4.5 text-surface-500" />
             Test Coverage
           </h2>
           <div className="space-y-2 mb-4">
@@ -247,7 +247,7 @@ export default function Analysis() {
         {/* External Dependencies */}
         <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold text-surface-900 mb-3 flex items-center gap-2">
-            <Link2 className="w-4.5 h-4.5 text-primary-600" />
+            <Link2 className="w-4.5 h-4.5 text-surface-500" />
             Key Dependencies
           </h2>
           <div className="space-y-2">
@@ -278,7 +278,7 @@ export default function Analysis() {
                 <StatusBadge status={td.severity} />
               </div>
               <p className="text-xs text-surface-500 mb-2">{td.description}</p>
-              <p className="text-xs text-primary-600">
+              <p className="text-xs text-surface-600">
                 <span className="font-medium">Recommendation:</span> {td.recommendation}
               </p>
             </div>

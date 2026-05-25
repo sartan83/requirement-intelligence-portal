@@ -31,12 +31,12 @@ export default function Handoff() {
           <h2 className="text-lg font-semibold text-surface-700 mb-2">No Execution Package Generated</h2>
           <p className="text-sm text-surface-500 mb-4">Approve requirements first, then generate the execution package.</p>
           <div className="flex items-center justify-center gap-3">
-            <button onClick={() => navigate('/requirements')} className="text-primary-600 text-sm font-medium flex items-center gap-1">
+            <button onClick={() => navigate('/requirements')} className="text-surface-600 hover:text-surface-900 text-sm font-medium flex items-center gap-1">
               <ArrowLeft className="w-4 h-4" /> Go to Requirements
             </button>
             <button
               onClick={() => generateExecutionPackage()}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+              className="bg-surface-900 hover:bg-surface-800 text-white px-4 py-2 rounded-lg text-sm font-medium"
             >
               Generate Package (Demo)
             </button>
@@ -89,7 +89,7 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-surface-900 mb-1 flex items-center gap-2">
-            <PackageCheck className="w-6 h-6 text-primary-600" />
+            <PackageCheck className="w-6 h-6 text-surface-900" />
             Devin-Ready Execution Package
           </h1>
           <p className="text-surface-500 text-sm">Implementation-ready package for AI engineering agents.</p>
@@ -103,7 +103,7 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
             {copiedSection === 'full' ? 'Copied!' : 'Copy Full Package'}
           </button>
           <button
-            className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+            className="bg-surface-900 hover:bg-surface-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
             onClick={() => {
               const blob = new Blob([fullPrompt], { type: 'text/markdown' });
               const url = URL.createObjectURL(blob);
@@ -127,7 +127,7 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
         <div className="mt-4 flex items-center gap-4">
           <div className="flex items-center gap-1.5 text-sm text-surface-300">
             <GitBranch className="w-4 h-4" />
-            <code className="font-mono text-primary-300">{pkg.suggestedBranch}</code>
+            <code className="font-mono text-surface-300">{pkg.suggestedBranch}</code>
           </div>
           <div className="flex items-center gap-1.5 text-sm text-surface-300">
             <ClipboardList className="w-4 h-4" />
@@ -141,7 +141,7 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
         <div className="space-y-1.5">
           {pkg.affectedComponents.map((comp, i) => (
             <div key={i} className="flex items-start gap-2 text-sm text-surface-700">
-              <span className="text-primary-500 mt-1 shrink-0">&#8226;</span>
+              <span className="text-surface-400 mt-1 shrink-0">&#8226;</span>
               {comp}
             </div>
           ))}
@@ -153,7 +153,7 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
         <div className="space-y-2">
           {pkg.implementationPlan.map((step, i) => (
             <div key={i} className="flex items-start gap-3">
-              <span className="w-6 h-6 rounded-full bg-primary-100 text-primary-700 text-xs flex items-center justify-center shrink-0 mt-0.5 font-semibold">
+              <span className="w-6 h-6 rounded-full bg-surface-100 text-surface-700 text-xs flex items-center justify-center shrink-0 mt-0.5 font-semibold">
                 {i + 1}
               </span>
               <span className="text-sm text-surface-700">{step.replace(/^Step \d+: /, '')}</span>
@@ -227,14 +227,14 @@ ${pkg.openQuestions.map(q => `- ${q}`).join('\n')}`;
       )}
 
       {/* Footer CTA */}
-      <div className="bg-primary-50 border border-primary-200 rounded-xl p-6 text-center">
-        <h3 className="font-semibold text-primary-900 mb-2">Ready to Execute</h3>
-        <p className="text-sm text-primary-700 mb-4">
+      <div className="bg-surface-50 border border-surface-200 rounded-xl p-6 text-center">
+        <h3 className="font-semibold text-surface-900 mb-2">Ready to Execute</h3>
+        <p className="text-sm text-surface-600 mb-4">
           Copy this package and hand it to Devin or any AI engineering agent for implementation.
         </p>
         <button
           onClick={() => copyToClipboard(fullPrompt, 'full-bottom')}
-          className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2"
+          className="bg-surface-900 hover:bg-surface-800 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-2"
         >
           <Copy className="w-4 h-4" />
           {copiedSection === 'full-bottom' ? 'Copied to Clipboard!' : 'Copy Full Execution Package'}
@@ -248,7 +248,7 @@ function PackageSection({ icon: Icon, title, children }: { icon: typeof Target; 
   return (
     <div className="bg-white rounded-xl border border-surface-200 p-6">
       <h2 className="font-semibold text-surface-900 mb-4 flex items-center gap-2">
-        <Icon className="w-4.5 h-4.5 text-primary-600" />
+        <Icon className="w-4.5 h-4.5 text-surface-500" />
         {title}
       </h2>
       {children}

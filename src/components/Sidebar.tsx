@@ -8,7 +8,7 @@ import {
   Layers,
   ClipboardList,
   PackageCheck,
-  Brain,
+  Sparkles,
 } from 'lucide-react';
 import { useApp } from '../context/useApp';
 
@@ -35,18 +35,20 @@ export default function Sidebar() {
   });
 
   return (
-    <aside className="w-60 bg-surface-900 text-white flex flex-col shrink-0 h-full">
-      <div className="p-5 border-b border-surface-700">
+    <aside className="w-56 bg-white border-r border-surface-200 flex flex-col shrink-0 h-full">
+      <div className="p-5 border-b border-surface-200">
         <div className="flex items-center gap-2.5">
-          <Brain className="w-7 h-7 text-primary-400" />
+          <div className="w-7 h-7 bg-surface-900 rounded-lg flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-white" />
+          </div>
           <div>
-            <h1 className="text-sm font-semibold tracking-tight">Requirement</h1>
-            <h1 className="text-sm font-semibold tracking-tight text-primary-400">Intelligence Portal</h1>
+            <h1 className="text-sm font-semibold tracking-tight text-surface-900">Requirement</h1>
+            <h1 className="text-xs font-medium tracking-tight text-surface-500">Intelligence Portal</h1>
           </div>
         </div>
       </div>
 
-      <nav className="flex-1 py-3 overflow-y-auto">
+      <nav className="flex-1 py-2 overflow-y-auto">
         {visibleItems.map(item => {
           const Icon = item.icon;
           const isActive = location.pathname === item.to;
@@ -54,13 +56,13 @@ export default function Sidebar() {
             <NavLink
               key={item.to}
               to={item.to}
-              className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-colors ${
+              className={`flex items-center gap-3 mx-2 px-3 py-2 text-sm rounded-lg transition-colors ${
                 isActive
-                  ? 'bg-primary-600/20 text-primary-300 border-r-2 border-primary-400'
-                  : 'text-surface-300 hover:bg-surface-800 hover:text-white'
+                  ? 'bg-surface-100 text-surface-900 font-medium'
+                  : 'text-surface-500 hover:bg-surface-50 hover:text-surface-900'
               }`}
             >
-              <Icon className="w-4.5 h-4.5" />
+              <Icon className="w-4 h-4" />
               {item.label}
             </NavLink>
           );
@@ -68,10 +70,10 @@ export default function Sidebar() {
       </nav>
 
       {hasRepo && (
-        <div className="p-4 border-t border-surface-700">
+        <div className="p-4 border-t border-surface-200">
           <div className="text-xs text-surface-400 mb-1">Connected Repository</div>
-          <div className="text-sm font-medium truncate">{repository.name}</div>
-          <div className="text-xs text-surface-500 truncate">{repository.branch}</div>
+          <div className="text-sm font-medium text-surface-900 truncate">{repository.name}</div>
+          <div className="text-xs text-surface-400 truncate">{repository.branch}</div>
         </div>
       )}
     </aside>
