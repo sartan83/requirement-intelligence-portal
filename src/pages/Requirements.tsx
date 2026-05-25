@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/useApp';
 import StatusBadge from '../components/StatusBadge';
@@ -17,14 +17,21 @@ import {
   Shield,
   Globe,
   Layers,
+  Plus,
+  MessageSquarePlus,
+  Square,
+  CheckSquare,
 } from 'lucide-react';
 import type { Requirement } from '../types';
 
 export default function Requirements() {
   const navigate = useNavigate();
-  const { requirements, updateRequirement, generateExecutionPackage } = useApp();
+  const { requirements, updateRequirement, addRequirement, generateExecutionPackage } = useApp();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [filterType, setFilterType] = useState<string>('all');
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [customDescription, setCustomDescription] = useState('');
+  const idCounter = useRef(0);
 
   const filtered = filterType === 'all' ? requirements : requirements.filter(r => r.type === filterType);
 
@@ -36,12 +43,59 @@ export default function Requirements() {
     updateRequirement(id, { status: 'ready' });
   };
 
+  const toggleSelect = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === filtered.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(filtered.map(r => r.id)));
+    }
+  };
+
   const handleGenerateHandoff = () => {
     generateExecutionPackage();
     navigate('/handoff');
   };
 
+  const handleAddCustomRequirement = () => {
+    if (!customDescription.trim()) return;
+    const newReq: Requirement = {
+      id: `req-custom-${++idCounter.current}`,
+      type: 'functional',
+      title: customDescription.length > 80 ? customDescription.slice(0, 80) + '...' : customDescription,
+      businessObjective: customDescription,
+      currentState: 'To be analyzed based on current codebase.',
+      futureState: customDescription,
+      userStory: '',
+      functionalRequirements: ['To be detailed after analysis'],
+      technicalRequirements: ['To be detailed after analysis'],
+      nonFunctionalRequirements: [],
+      acceptanceCriteria: ['To be defined'],
+      testScenarios: ['To be defined'],
+      impactedFiles: [],
+      apiImpact: 'To be assessed',
+      securityImpact: 'To be assessed',
+      risks: [],
+      dependencies: [],
+      openQuestions: ['Detailed requirements to be refined with product owner'],
+      complexity: 'medium',
+      status: 'draft',
+    };
+    addRequirement(newReq);
+    setCustomDescription('');
+    setSelectedIds(prev => new Set([...prev, newReq.id]));
+  };
+
   const approvedCount = requirements.filter(r => r.status === 'approved' || r.status === 'ready').length;
+  const selectedCount = selectedIds.size;
 
   return (
     <div className="py-8 px-6 max-w-5xl mx-auto space-y-6">
@@ -54,30 +108,45 @@ export default function Requirements() {
           </h1>
           <p className="text-surface-500 text-sm">
             {requirements.length} requirements &middot; {approvedCount} approved
+            {selectedCount > 0 && <span className="text-primary-600 font-medium"> &middot; {selectedCount} selected</span>}
           </p>
         </div>
         <button
           onClick={handleGenerateHandoff}
-          disabled={approvedCount === 0}
+          disabled={selectedCount === 0 && approvedCount === 0}
           className="bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
         >
-          Generate Execution Package <ArrowRight className="w-4 h-4" />
+          Generate Execution Package{selectedCount > 0 ? ` (${selectedCount})` : ''} <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Filters */}
-      <div className="flex items-center gap-2">
-        {['all', 'business', 'functional', 'technical', 'non-functional'].map(type => (
+      {/* Filters + Select All */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {['all', 'business', 'functional', 'technical', 'non-functional'].map(type => (
+            <button
+              key={type}
+              onClick={() => setFilterType(type)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${
+                filterType === type ? 'bg-primary-600 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+              }`}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+        {filtered.length > 0 && (
           <button
-            key={type}
-            onClick={() => setFilterType(type)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${
-              filterType === type ? 'bg-primary-600 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
-            }`}
+            onClick={toggleSelectAll}
+            className="text-xs text-surface-500 hover:text-primary-600 font-medium flex items-center gap-1.5 transition-colors"
           >
-            {type}
+            {selectedIds.size === filtered.length ? (
+              <><CheckSquare className="w-4 h-4" /> Deselect All</>
+            ) : (
+              <><Square className="w-4 h-4" /> Select All</>
+            )}
           </button>
-        ))}
+        )}
       </div>
 
       {/* Requirements List */}
@@ -93,13 +162,41 @@ export default function Requirements() {
               key={req.id}
               requirement={req}
               expanded={expandedId === req.id}
+              selected={selectedIds.has(req.id)}
               onToggle={() => setExpandedId(expandedId === req.id ? null : req.id)}
+              onSelect={() => toggleSelect(req.id)}
               onApprove={() => handleApprove(req.id)}
               onMarkReady={() => handleMarkReady(req.id)}
             />
           ))}
         </div>
       )}
+
+      {/* Custom Change Description */}
+      <div className="bg-white rounded-xl border border-surface-200 p-5">
+        <h3 className="text-sm font-semibold text-surface-900 mb-3 flex items-center gap-2">
+          <MessageSquarePlus className="w-4 h-4 text-primary-600" />
+          Describe Additional Changes
+        </h3>
+        <p className="text-xs text-surface-500 mb-3">Describe any other modifications you need in natural language. A new requirement will be created from your description.</p>
+        <textarea
+          value={customDescription}
+          onChange={e => setCustomDescription(e.target.value)}
+          placeholder="e.g. Add a dark mode toggle to the user settings page, allowing users to switch between light and dark themes..."
+          rows={3}
+          className="w-full border border-surface-200 rounded-lg px-3 py-2 text-sm text-surface-800 placeholder-surface-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+        />
+        <div className="flex justify-end mt-3">
+          <button
+            onClick={handleAddCustomRequirement}
+            disabled={!customDescription.trim()}
+            className="bg-surface-900 hover:bg-surface-800 disabled:opacity-40 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            Add as Requirement
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -107,34 +204,51 @@ export default function Requirements() {
 function RequirementCard({
   requirement: req,
   expanded,
+  selected,
   onToggle,
+  onSelect,
   onApprove,
   onMarkReady,
 }: {
   requirement: Requirement;
   expanded: boolean;
+  selected: boolean;
   onToggle: () => void;
+  onSelect: () => void;
   onApprove: () => void;
   onMarkReady: () => void;
 }) {
   return (
-    <div className="bg-white rounded-xl border border-surface-200 overflow-hidden">
+    <div className={`bg-white rounded-xl border overflow-hidden transition-colors ${selected ? 'border-primary-400 ring-1 ring-primary-200' : 'border-surface-200'}`}>
       {/* Header */}
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-surface-50 transition-colors"
-      >
-        <div className="flex-1 mr-4">
-          <div className="flex items-center gap-2 mb-1">
-            <StatusBadge status={req.type} />
-            <StatusBadge status={req.status} />
-            <StatusBadge status={req.complexity} />
+      <div className="flex items-center">
+        <button
+          onClick={onSelect}
+          className="shrink-0 pl-5 pr-2 py-5 self-stretch flex items-start pt-6 hover:bg-surface-50 transition-colors"
+          title={selected ? 'Deselect requirement' : 'Select requirement'}
+        >
+          {selected ? (
+            <CheckSquare className="w-5 h-5 text-primary-600" />
+          ) : (
+            <Square className="w-5 h-5 text-surface-300 hover:text-surface-500" />
+          )}
+        </button>
+        <button
+          onClick={onToggle}
+          className="flex-1 flex items-center justify-between p-5 pl-2 text-left hover:bg-surface-50 transition-colors"
+        >
+          <div className="flex-1 mr-4">
+            <div className="flex items-center gap-2 mb-1">
+              <StatusBadge status={req.type} />
+              <StatusBadge status={req.status} />
+              <StatusBadge status={req.complexity} />
+            </div>
+            <h3 className="text-sm font-semibold text-surface-900">{req.title}</h3>
+            <p className="text-xs text-surface-500 mt-1 line-clamp-1">{req.businessObjective}</p>
           </div>
-          <h3 className="text-sm font-semibold text-surface-900">{req.title}</h3>
-          <p className="text-xs text-surface-500 mt-1 line-clamp-1">{req.businessObjective}</p>
-        </div>
-        {expanded ? <ChevronUp className="w-4 h-4 text-surface-400" /> : <ChevronDown className="w-4 h-4 text-surface-400" />}
-      </button>
+          {expanded ? <ChevronUp className="w-4 h-4 text-surface-400" /> : <ChevronDown className="w-4 h-4 text-surface-400" />}
+        </button>
+      </div>
 
       {/* Expanded Content */}
       {expanded && (
