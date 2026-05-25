@@ -4,13 +4,206 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Requirement Intelligence Portal — Turn business intent into execution-ready IT requirements. A multimodal platform for business and IT stakeholders to capture ideas, meetings, screenshots, documents or repositories and generate validated requirement packs." />
+    <meta name="keywords" content="requirement intelligence, business requirements, IT requirements, functional requirements, user stories, delivery planning, risk analysis, SDLC, software delivery, AI requirements" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Requirement Intelligence Portal" />
+    <meta property="og:description" content="Turn business intent into execution-ready IT requirements. Capture ideas, meetings, screenshots, documents or repositories. The platform analyzes the context and creates a validated requirement pack for business and IT teams." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Requirement Intelligence Portal" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Requirement Intelligence Portal</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static content for crawlers and AI tools that don't execute JavaScript -->
+      <article id="static-content">
+        <header>
+          <h1>Requirement Intelligence Portal</h1>
+          <p><strong>Turn business intent into execution-ready IT requirements.</strong></p>
+          <p>Describe what you want to change. Upload supporting material if you have it. The platform analyzes business context, technical impact, dependencies and risks, then generates a complete delivery-ready requirement package.</p>
+        </header>
+
+        <section>
+          <h2>Two Entry Points</h2>
+
+          <h3>Business Mode — Start from a business need</h3>
+          <p>For business stakeholders, product owners, transformation teams and CIO offices.</p>
+          <ul>
+            <li>"We need to improve customer onboarding"</li>
+            <li>"We must comply with a new regulation"</li>
+            <li>"The current approval process is too slow"</li>
+            <li>"We want to launch a new digital service"</li>
+            <li>"Customers are dropping off during document upload"</li>
+          </ul>
+
+          <h3>IT Mode — Start from an IT asset</h3>
+          <p>For application owners, architects, engineering teams and IT demand managers.</p>
+          <ul>
+            <li>"Analyze this repository"</li>
+            <li>"Assess modernization options"</li>
+            <li>"Identify dependencies and risks"</li>
+            <li>"Generate requirements for a change request"</li>
+            <li>"Translate technical debt into business impact"</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Multimodal Input Support</h2>
+          <p>The platform accepts multiple types of input:</p>
+          <ul>
+            <li><strong>Text:</strong> Describe the business outcome, process issue, regulation, or technical problem.</li>
+            <li><strong>Audio:</strong> Upload audio notes or meeting recordings (mp3, wav, m4a).</li>
+            <li><strong>Video:</strong> Upload meeting recordings, demos, walkthroughs or screen recordings (mp4, mov, webm).</li>
+            <li><strong>Images:</strong> Upload screenshots, whiteboards, process diagrams, mockups, error screens (png, jpg, webp).</li>
+            <li><strong>Documents:</strong> Upload business documents, policies, regulations, BRDs, functional specs (pdf, docx, txt, md).</li>
+            <li><strong>URLs:</strong> Add URLs to applications, documentation pages, or business references.</li>
+            <li><strong>Repositories:</strong> Connect a repository or technical source as supporting evidence.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Guided Intake Questions</h2>
+          <h3>Business Mode</h3>
+          <ol>
+            <li>What business outcome are you trying to achieve?</li>
+            <li>Who is impacted by this change?</li>
+            <li>What is not working today?</li>
+            <li>What would success look like?</li>
+            <li>Is there any deadline, regulation, risk or dependency we should consider?</li>
+          </ol>
+          <h3>IT Mode</h3>
+          <ol>
+            <li>Which application, service or repository should be assessed?</li>
+            <li>What change, issue or modernization goal should be considered?</li>
+            <li>Are there known dependencies or constraints?</li>
+            <li>Are there security, compliance or architectural standards to respect?</li>
+            <li>What output do you need: requirements, user stories, technical analysis, effort estimate or delivery plan?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Agentic Analysis</h2>
+          <p>Multiple agents analyze the input in parallel:</p>
+          <ol>
+            <li><strong>Business Intent Agent:</strong> Extracts objectives, stakeholders, pain points, value drivers and success metrics.</li>
+            <li><strong>Process Analysis Agent:</strong> Identifies impacted business processes, user journeys and operational gaps.</li>
+            <li><strong>Technical Impact Agent:</strong> Analyzes repositories, application structure, APIs, dependencies and system constraints.</li>
+            <li><strong>Risk &amp; Compliance Agent:</strong> Maps regulatory, security, privacy, resilience and operational risks.</li>
+            <li><strong>Requirement Generation Agent:</strong> Creates functional requirements, technical requirements, user stories and acceptance criteria.</li>
+            <li><strong>Delivery Planning Agent:</strong> Produces implementation options, effort estimate, dependencies, test strategy and handoff package.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Output: Requirement Intelligence Pack</h2>
+          <p>The platform generates a comprehensive requirement pack with 8 sections:</p>
+
+          <h3>1. Executive Summary</h3>
+          <p>Business objective, current problem, expected outcome, impacted stakeholders, value hypothesis, urgency/deadline, confidence score.</p>
+
+          <h3>2. Business Requirements</h3>
+          <p>Business capabilities impacted, process changes needed, user groups affected, success metrics, business rules, open questions.</p>
+
+          <h3>3. Functional Requirements</h3>
+          <p>Requirement ID, description, user role, priority, rationale, acceptance criteria.</p>
+
+          <h3>4. Technical Requirements</h3>
+          <p>Systems impacted, APIs/integrations, data implications, architecture considerations, non-functional requirements, security and compliance constraints.</p>
+
+          <h3>5. User Stories</h3>
+          <p>Format: "As a [user], I want [capability], so that [business outcome]." Each story includes priority, acceptance criteria, dependencies, risks, suggested test cases.</p>
+
+          <h3>6. Risk &amp; Dependency Map</h3>
+          <p>Technical dependencies, business dependencies, compliance risks, delivery risks, data risks, operational risks.</p>
+
+          <h3>7. Delivery Plan</h3>
+          <p>Recommended implementation path, MVP scope, out-of-scope items, estimated complexity, suggested delivery phases, test strategy, rollback considerations.</p>
+
+          <h3>8. Handoff</h3>
+          <p>Export to Jira, Export to Azure DevOps, Export as Markdown, Export as PDF, Generate Devin-ready prompt, Generate Copilot-ready implementation brief, Generate BA workshop agenda, Generate stakeholder validation pack.</p>
+        </section>
+
+        <section>
+          <h2>Demo Scenario: Improve Digital Customer Onboarding</h2>
+          <p><strong>Business input:</strong> "Our customer onboarding journey has high drop-off during document upload and manual approval. We want to reduce abandonment, accelerate approval time and improve compliance controls."</p>
+
+          <h3>Executive Summary</h3>
+          <ul>
+            <li><strong>Business Objective:</strong> Reduce customer onboarding drop-off and accelerate approval time while maintaining compliance standards.</li>
+            <li><strong>Current Problem:</strong> High abandonment during document upload (35% drop-off), slow manual approval process (avg 3 days), no real-time status visibility for customers or operations.</li>
+            <li><strong>Expected Outcome:</strong> Onboarding completion rate above 90%, approval time under 4 hours, zero compliance gaps, full audit trail and operational visibility.</li>
+            <li><strong>Impacted Stakeholders:</strong> Retail customers, Operations team, Compliance officers, Customer success managers, IT engineering team.</li>
+            <li><strong>Confidence Score:</strong> 87%</li>
+          </ul>
+
+          <h3>Functional Requirements</h3>
+          <ol>
+            <li><strong>FR-001:</strong> Allow customers to resume incomplete onboarding applications (Priority: High)</li>
+            <li><strong>FR-002:</strong> Improve document upload with drag-and-drop, mobile camera capture, and real-time validation (Priority: High)</li>
+            <li><strong>FR-003:</strong> Add real-time onboarding status visibility for customers (Priority: High)</li>
+            <li><strong>FR-004:</strong> Implement automated routing of applications based on risk score (Priority: High)</li>
+            <li><strong>FR-005:</strong> Add SLA monitoring dashboard for operations team (Priority: Medium)</li>
+            <li><strong>FR-006:</strong> Notify operations when SLA thresholds are breached (Priority: Medium)</li>
+            <li><strong>FR-007:</strong> Generate compliance audit trail for all onboarding decisions (Priority: High)</li>
+            <li><strong>FR-008:</strong> Automate document validation for standard KYC document types (Priority: Medium)</li>
+          </ol>
+
+          <h3>User Stories</h3>
+          <ul>
+            <li><strong>US-001:</strong> As a retail customer, I want to resume my incomplete onboarding application, so that I don't have to start over if I get interrupted.</li>
+            <li><strong>US-002:</strong> As a retail customer, I want clear feedback when my document upload fails, so that I can fix the issue and complete onboarding.</li>
+            <li><strong>US-003:</strong> As an operations team member, I want to see a dashboard of pending applications with SLA status, so that I can prioritize my review queue.</li>
+            <li><strong>US-004:</strong> As a compliance officer, I want to generate audit reports for all onboarding decisions, so that I can demonstrate regulatory compliance.</li>
+            <li><strong>US-005:</strong> As a retail customer, I want to see real-time status of my onboarding application, so that I know what to expect and when.</li>
+          </ul>
+
+          <h3>Technical Requirements</h3>
+          <ul>
+            <li><strong>Systems Impacted:</strong> Document Upload Service, Application Processing Engine, Notification Service, Admin Dashboard, Audit Logging Service, Customer Portal</li>
+            <li><strong>APIs:</strong> POST /api/onboarding/resume, PUT /api/documents/upload, GET /api/onboarding/{id}/status, POST /api/routing/evaluate, GET /api/operations/queue, POST /api/notifications/sla-breach</li>
+            <li><strong>Security:</strong> Documents encrypted at rest (AES-256) and in transit (TLS 1.3), PII data masked in logs, GDPR right to erasure support</li>
+          </ul>
+
+          <h3>Delivery Plan</h3>
+          <ul>
+            <li><strong>Estimated Complexity:</strong> Medium-High</li>
+            <li><strong>Phase 1 — Foundation (4 weeks):</strong> Document upload redesign, Application resume capability, Status tracking API, Basic audit logging</li>
+            <li><strong>Phase 2 — Automation (3 weeks):</strong> Risk-based routing engine, Auto-approval for standard cases, SLA monitoring dashboard, Notification integration</li>
+            <li><strong>Phase 3 — Compliance &amp; Polish (2 weeks):</strong> Compliance reporting, Escalation workflows, Mobile optimization, Performance testing and hardening</li>
+          </ul>
+
+          <h3>Risk &amp; Dependency Map</h3>
+          <ul>
+            <li><strong>Technical:</strong> Document upload service refactoring, Notification service integration, Identity verification provider API availability, Database migration</li>
+            <li><strong>Compliance:</strong> Auto-approval rules must be validated by legal, Document retention changes require DPO review, Audit trail design must pass pre-audit review</li>
+            <li><strong>Delivery:</strong> Mobile upload compatibility, Integration complexity with identity verification, Data migration for in-flight applications</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Evidence Analysis Capabilities</h2>
+          <h3>Audio Analysis</h3>
+          <p>Transcript summary, extracted business objectives, decisions captured, pain points mentioned, action items, unresolved questions, candidate requirements.</p>
+          <h3>Image Analysis</h3>
+          <p>Detected content type (screenshot, mockup, error, architecture, process diagram, whiteboard), extracted elements, possible impacted process, candidate requirements.</p>
+          <h3>Document Analysis</h3>
+          <p>Key sections analyzed, extracted requirements, risks and constraints, inconsistencies, missing information.</p>
+          <h3>Repository Analysis</h3>
+          <p>Application overview, relevant modules, dependency highlights, likely impacted components, technical constraints, modernization opportunities.</p>
+        </section>
+
+        <section>
+          <h2>Navigation</h2>
+          <p>Journey stages: 1. Intent → 2. Evidence → 3. Analysis → 4. Requirements → 5. Handoff</p>
+          <p>Pages: Home, New Intake, Analysis, Requirement Pack, Handoff</p>
+        </section>
+      </article>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
