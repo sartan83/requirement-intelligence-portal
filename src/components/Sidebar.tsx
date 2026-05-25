@@ -1,11 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
-  GitBranch,
+  PenLine,
   BarChart3,
-  Map,
-  MonitorSmartphone,
-  Layers,
   ClipboardList,
   PackageCheck,
   Sparkles,
@@ -14,23 +11,19 @@ import { useApp } from '../context/useApp';
 
 const allNavItems = [
   { to: '/', icon: LayoutDashboard, label: 'Home', always: true },
-  { to: '/connect', icon: GitBranch, label: 'Repository', always: true },
-  { to: '/analysis', icon: BarChart3, label: 'Analysis', needsRepo: true },
-  { to: '/map', icon: Map, label: 'App Map', needsRepo: true },
-  { to: '/mockup', icon: MonitorSmartphone, label: 'UI Workspace', needsRepo: true, uiOnly: true },
-  { to: '/components', icon: Layers, label: 'Components', needsRepo: true },
-  { to: '/requirements', icon: ClipboardList, label: 'Requirements', needsRepo: true },
-  { to: '/handoff', icon: PackageCheck, label: 'Handoff', needsRepo: true },
+  { to: '/intake', icon: PenLine, label: 'New Intake', always: true },
+  { to: '/analysis', icon: BarChart3, label: 'Analysis', needsIntake: true },
+  { to: '/requirement-pack', icon: ClipboardList, label: 'Requirement Pack', needsAnalysis: true },
+  { to: '/handoff', icon: PackageCheck, label: 'Handoff', needsAnalysis: true },
 ];
 
 export default function Sidebar() {
-  const { repository, appMode } = useApp();
+  const { intakeData, analysisComplete } = useApp();
   const location = useLocation();
-  const hasRepo = repository?.status === 'completed';
 
   const visibleItems = allNavItems.filter(item => {
-    if (item.needsRepo && !hasRepo) return false;
-    if (item.uiOnly && appMode !== 'ui') return false;
+    if (item.needsIntake && !intakeData && !analysisComplete) return false;
+    if (item.needsAnalysis && !analysisComplete) return false;
     return true;
   });
 
@@ -69,13 +62,31 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {hasRepo && (
-        <div className="p-4 border-t border-surface-200">
-          <div className="text-xs text-surface-400 mb-1">Connected Repository</div>
-          <div className="text-sm font-medium text-surface-900 truncate">{repository.name}</div>
-          <div className="text-xs text-surface-400 truncate">{repository.branch}</div>
-        </div>
-      )}
+      {/* Progress tracker */}
+      <div className="p-4 border-t border-surface-200">
+        <div className="text-xs font-medium text-surface-500 mb-3">Journey</div>
+        <ProgressStep step={1} label="Intent" done={!!intakeData} active={location.pathname === '/intake'} />
+        <ProgressStep step={2} label="Evidence" done={!!intakeData} active={false} />
+        <ProgressStep step={3} label="Analysis" done={analysisComplete} active={location.pathname === '/analysis'} />
+        <ProgressStep step={4} label="Requirements" done={analysisComplete} active={location.pathname === '/requirement-pack'} />
+        <ProgressStep step={5} label="Handoff" done={false} active={location.pathname === '/handoff'} last />
+      </div>
     </aside>
+  );
+}
+
+function ProgressStep({ step, label, done, active, last }: { step: number; label: string; done: boolean; active: boolean; last?: boolean }) {
+  return (
+    <div className="flex items-start gap-2">
+      <div className="flex flex-col items-center">
+        <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium ${
+          done ? 'bg-surface-900 text-white' : active ? 'bg-surface-900 text-white' : 'bg-surface-100 text-surface-400'
+        }`}>
+          {step}
+        </div>
+        {!last && <div className="w-px h-4 bg-surface-200" />}
+      </div>
+      <span className={`text-xs pt-0.5 ${done || active ? 'text-surface-900 font-medium' : 'text-surface-400'}`}>{label}</span>
+    </div>
   );
 }

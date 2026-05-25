@@ -2,13 +2,10 @@ import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Sidebar from './components/Sidebar';
 import Landing from './pages/Landing';
-import Connect from './pages/Connect';
-import Analysis from './pages/Analysis';
-import AppMap from './pages/AppMap';
-import MockupWorkspace from './pages/MockupWorkspace';
-import ComponentWorkspace from './pages/ComponentWorkspace';
-import Requirements from './pages/Requirements';
-import Handoff from './pages/Handoff';
+import Intake from './pages/Intake';
+import AgentAnalysis from './pages/AgentAnalysis';
+import RequirementPack from './pages/RequirementPack';
+import HandoffNew from './pages/HandoffNew';
 
 function AppLayout() {
   const location = useLocation();
@@ -23,13 +20,10 @@ function AppLayout() {
       <Sidebar />
       <main className="flex-1 overflow-auto">
         <Routes>
-          <Route path="/connect" element={<Connect />} />
-          <Route path="/analysis" element={<Analysis />} />
-          <Route path="/map" element={<AppMap />} />
-          <Route path="/mockup" element={<MockupWorkspace />} />
-          <Route path="/components" element={<ComponentWorkspace />} />
-          <Route path="/requirements" element={<Requirements />} />
-          <Route path="/handoff" element={<Handoff />} />
+          <Route path="/intake" element={<Intake />} />
+          <Route path="/analysis" element={<AgentAnalysis />} />
+          <Route path="/requirement-pack" element={<RequirementPack />} />
+          <Route path="/handoff" element={<HandoffNew />} />
         </Routes>
       </main>
     </div>

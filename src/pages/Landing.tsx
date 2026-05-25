@@ -1,98 +1,157 @@
 import { useNavigate } from 'react-router-dom';
-import { GitBranch, BarChart3, ClipboardList, PackageCheck, ArrowRight, Layers, MonitorSmartphone, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Briefcase, Server, Sparkles, Lightbulb, Mic, Camera, FileText, Link2, GitBranch } from 'lucide-react';
+import { useApp } from '../context/useApp';
 
-const steps = [
-  { icon: GitBranch, title: 'Connect Repository', desc: 'Ingest and analyze any codebase to understand its structure, stack, and architecture.' },
-  { icon: BarChart3, title: 'Deep Analysis', desc: 'Discover modules, APIs, data entities, user journeys, technical debt, and test gaps.' },
-  { icon: MonitorSmartphone, title: 'Interactive Workspace', desc: 'Explore UI mockups or system maps. Propose changes visually or structurally.' },
-  { icon: ClipboardList, title: 'Generate Requirements', desc: 'Produce structured business, functional, and technical requirements automatically.' },
-  { icon: PackageCheck, title: 'Devin-Ready Handoff', desc: 'Export implementation-ready execution packages for AI engineering agents.' },
+const businessExamples = [
+  'We need to improve customer onboarding',
+  'We must comply with a new regulation',
+  'The current approval process is too slow',
+  'We want to launch a new digital service',
+  'Customers are dropping off during document upload',
 ];
 
-const features = [
-  { icon: Layers, title: 'Full Stack Understanding', desc: 'Frontend, backend, APIs, databases, auth, deployment — analyzed holistically.' },
-  { icon: Sparkles, title: 'Intelligence Layer', desc: 'Not just documentation. Smart analysis of risks, debt, and change impact.' },
-  { icon: PackageCheck, title: 'Agent-Ready Output', desc: 'Structured packages designed for AI agents like Devin to execute immediately.' },
+const itExamples = [
+  'Analyze this repository',
+  'Assess modernization options',
+  'Identify dependencies and risks',
+  'Generate requirements for a change request',
+  'Translate technical debt into business impact',
+];
+
+const supportedInputs = [
+  { icon: FileText, label: 'Documents & specs' },
+  { icon: Mic, label: 'Audio & recordings' },
+  { icon: Camera, label: 'Screenshots & diagrams' },
+  { icon: Link2, label: 'URLs & references' },
+  { icon: GitBranch, label: 'Repositories' },
 ];
 
 export default function Landing() {
   const navigate = useNavigate();
+  const { setIntakeMode, loadDemoScenario } = useApp();
+
+  const handleBusinessMode = () => {
+    setIntakeMode('business');
+    navigate('/intake');
+  };
+
+  const handleITMode = () => {
+    setIntakeMode('it');
+    navigate('/intake');
+  };
+
+  const handleDemo = () => {
+    loadDemoScenario();
+    navigate('/requirement-pack');
+  };
 
   return (
     <div className="min-h-full bg-white">
       {/* Hero */}
       <section className="relative">
-        <div className="max-w-4xl mx-auto px-6 pt-28 pb-20 text-center">
+        <div className="max-w-4xl mx-auto px-6 pt-24 pb-16 text-center">
           <div className="inline-flex items-center gap-2 bg-surface-100 text-surface-600 rounded-full px-4 py-1.5 text-sm font-medium mb-8">
-            <Zap className="w-3.5 h-3.5" />
-            Requirements Intelligence for Software Delivery
+            <Sparkles className="w-3.5 h-3.5" />
+            Requirement Intelligence Platform
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-surface-900 mb-6 leading-[1.1] tracking-tight">
-            From business intent to<br />
-            implementation-ready<br />
+            Turn business intent into<br />
+            execution-ready IT<br />
             requirements
           </h1>
-          <p className="text-lg text-surface-500 max-w-xl mx-auto mb-10 leading-relaxed">
-            Analyze your codebase. Understand your application. Generate structured, validated requirements. Make AI engineering agents dramatically more effective.
+          <p className="text-lg text-surface-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Describe what you want to change. Upload supporting material if you have it.
+            The platform analyzes business context, technical impact, dependencies and risks,
+            then generates a complete delivery-ready requirement package.
           </p>
           <div className="flex items-center justify-center gap-3">
             <button
-              onClick={() => navigate('/connect')}
+              onClick={handleBusinessMode}
               className="inline-flex items-center gap-2 bg-surface-900 hover:bg-surface-800 text-white px-6 py-3 rounded-full font-medium transition-colors text-sm"
             >
-              Get Started <ArrowRight className="w-4 h-4" />
+              Start from a business need <ArrowRight className="w-4 h-4" />
             </button>
             <button
-              onClick={() => navigate('/analysis')}
+              onClick={handleITMode}
               className="inline-flex items-center gap-2 bg-white hover:bg-surface-50 text-surface-700 border border-surface-200 px-6 py-3 rounded-full font-medium transition-colors text-sm"
             >
-              View Demo Analysis
+              Start from an IT asset
             </button>
           </div>
         </div>
       </section>
 
-      {/* Process Steps */}
-      <section className="max-w-5xl mx-auto px-6 py-20">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl font-bold text-surface-900 mb-3 tracking-tight">The missing layer in AI-powered development</h2>
-          <p className="text-surface-500 max-w-xl mx-auto">
-            AI agents optimize execution. This portal optimizes the requirements that drive execution.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-5 gap-6">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <div key={i} className="relative text-center group">
-                <div className="w-11 h-11 rounded-xl bg-surface-100 text-surface-700 flex items-center justify-center mx-auto mb-3 group-hover:bg-surface-900 group-hover:text-white transition-colors">
-                  <Icon className="w-5 h-5" />
+      {/* Mode Cards */}
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Business Mode Card */}
+          <div className="rounded-2xl border border-surface-200 p-8 hover:border-surface-300 transition-colors">
+            <div className="w-11 h-11 rounded-xl bg-surface-100 text-surface-700 flex items-center justify-center mb-5">
+              <Briefcase className="w-5 h-5" />
+            </div>
+            <h3 className="text-lg font-semibold text-surface-900 mb-2">Start from a business need</h3>
+            <p className="text-sm text-surface-500 mb-5 leading-relaxed">
+              For business stakeholders, product owners, transformation teams and CIO offices.
+            </p>
+            <div className="space-y-2 mb-6">
+              {businessExamples.map((ex, i) => (
+                <div key={i} className="flex items-start gap-2 text-sm text-surface-500">
+                  <Lightbulb className="w-3.5 h-3.5 mt-0.5 shrink-0 text-surface-400" />
+                  <span className="italic">&ldquo;{ex}&rdquo;</span>
                 </div>
-                <div className="text-xs font-medium text-surface-400 mb-1">Step {i + 1}</div>
-                <h3 className="text-sm font-semibold text-surface-900 mb-1">{step.title}</h3>
-                <p className="text-xs text-surface-500 leading-relaxed">{step.desc}</p>
-                {i < steps.length - 1 && (
-                  <ArrowRight className="hidden md:block absolute top-5 -right-4 w-4 h-4 text-surface-300" />
-                )}
-              </div>
-            );
-          })}
+              ))}
+            </div>
+            <button
+              onClick={handleBusinessMode}
+              className="w-full bg-surface-900 hover:bg-surface-800 text-white py-2.5 rounded-lg text-sm font-medium transition-colors"
+            >
+              Describe business change
+            </button>
+          </div>
+
+          {/* IT Mode Card */}
+          <div className="rounded-2xl border border-surface-200 p-8 hover:border-surface-300 transition-colors">
+            <div className="w-11 h-11 rounded-xl bg-surface-100 text-surface-700 flex items-center justify-center mb-5">
+              <Server className="w-5 h-5" />
+            </div>
+            <h3 className="text-lg font-semibold text-surface-900 mb-2">Start from an IT asset</h3>
+            <p className="text-sm text-surface-500 mb-5 leading-relaxed">
+              For application owners, architects, engineering teams and IT demand managers.
+            </p>
+            <div className="space-y-2 mb-6">
+              {itExamples.map((ex, i) => (
+                <div key={i} className="flex items-start gap-2 text-sm text-surface-500">
+                  <Lightbulb className="w-3.5 h-3.5 mt-0.5 shrink-0 text-surface-400" />
+                  <span className="italic">&ldquo;{ex}&rdquo;</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={handleITMode}
+              className="w-full bg-white hover:bg-surface-50 text-surface-700 border border-surface-200 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            >
+              Connect IT source
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* Supported Inputs */}
       <section className="border-t border-surface-200">
-        <div className="max-w-5xl mx-auto px-6 py-20">
-          <div className="grid md:grid-cols-3 gap-6">
-            {features.map((f, i) => {
-              const Icon = f.icon;
+        <div className="max-w-5xl mx-auto px-6 py-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-surface-900 mb-2 tracking-tight">Capture ideas, meetings, screenshots, documents or repositories</h2>
+            <p className="text-surface-500 text-sm">The platform analyzes the context and creates a validated requirement pack for business and IT teams.</p>
+          </div>
+          <div className="flex items-center justify-center gap-8">
+            {supportedInputs.map((input, i) => {
+              const Icon = input.icon;
               return (
-                <div key={i} className="rounded-2xl border border-surface-200 p-6 hover:border-surface-300 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-surface-100 text-surface-700 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5" />
+                <div key={i} className="text-center">
+                  <div className="w-12 h-12 rounded-xl bg-surface-50 border border-surface-200 flex items-center justify-center mx-auto mb-2">
+                    <Icon className="w-5 h-5 text-surface-500" />
                   </div>
-                  <h3 className="font-semibold text-surface-900 mb-2">{f.title}</h3>
-                  <p className="text-sm text-surface-500 leading-relaxed">{f.desc}</p>
+                  <span className="text-xs text-surface-500">{input.label}</span>
                 </div>
               );
             })}
@@ -100,18 +159,18 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Demo CTA */}
       <section className="border-t border-surface-200">
-        <div className="max-w-5xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl font-bold text-surface-900 mb-3 tracking-tight">Ready to transform your requirements process?</h2>
-          <p className="text-surface-500 mb-8 max-w-lg mx-auto">
-            Connect a repository and see how structured requirements intelligence bridges the gap between business intent and engineering execution.
+        <div className="max-w-5xl mx-auto px-6 py-16 text-center">
+          <h2 className="text-2xl font-bold text-surface-900 mb-3 tracking-tight">See it in action</h2>
+          <p className="text-surface-500 mb-6 max-w-lg mx-auto text-sm">
+            Try the demo scenario: &ldquo;Improve digital customer onboarding&rdquo; — complete with sample inputs, agent analysis, and a full requirement intelligence pack.
           </p>
           <button
-            onClick={() => navigate('/connect')}
+            onClick={handleDemo}
             className="inline-flex items-center gap-2 bg-surface-900 hover:bg-surface-800 text-white px-6 py-3 rounded-full font-medium transition-colors text-sm"
           >
-            Connect Your Repository <ArrowRight className="w-4 h-4" />
+            Load Demo Scenario <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </section>

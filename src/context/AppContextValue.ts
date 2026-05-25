@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 import type { Repository, ApplicationSummary, UIScreen, Requirement, ExecutionPackage, ChangeProposal, AppMode, TechStack, FileCategory } from '../types';
+import type { IntakeMode, IntakeData, AnalysisResult, RequirementPack } from '../types/business';
 
 export interface AppState {
+  // Legacy IT-led state
   repository: Repository | null;
   techStack: TechStack | null;
   fileCategories: FileCategory[];
@@ -13,6 +15,15 @@ export interface AppState {
   appMode: AppMode | null;
   analysisStep: number;
   isAnalyzing: boolean;
+
+  // New business-first state
+  intakeMode: IntakeMode | null;
+  intakeData: IntakeData | null;
+  analysisResult: AnalysisResult | null;
+  requirementPack: RequirementPack | null;
+  agentAnalysisStep: number;
+  isAgentAnalyzing: boolean;
+  analysisComplete: boolean;
 }
 
 export interface AppContextValue extends AppState {
@@ -23,6 +34,13 @@ export interface AppContextValue extends AppState {
   addChangeProposal: (proposal: ChangeProposal) => void;
   generateExecutionPackage: () => void;
   resetAnalysis: () => void;
+
+  // New business-first actions
+  setIntakeMode: (mode: IntakeMode) => void;
+  submitIntake: (data: IntakeData) => void;
+  startAgentAnalysis: () => void;
+  loadDemoScenario: () => void;
+  resetAll: () => void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);
